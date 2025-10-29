@@ -14,7 +14,7 @@ class Dog:
         """
     "Constructor"
     "self = this"
-    def __init__(self, fur_color, name, age, favorite_food) -> None:
+    def __init__(self, fur_color, name, age, favorite_food):
         """initialize a new Dog wit fu_color, name, age, and favorite_food"""
         self.fur_color = fur_color
         self.name = name
