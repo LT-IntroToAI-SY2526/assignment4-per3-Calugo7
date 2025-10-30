@@ -9,41 +9,53 @@ class TTTBoard:
         board - a list of '*'s, 'X's & 'O's. 'X's represent moves by player 'X', 'O's
             represent moves by player 'O' and '*'s are spots no one has yet played on
     """
-
     def __init__(self):
-        """initialize a 3x3 tic tac toe board with 9 '*"""
-        self.board = {'*'} * 9
+        """Initialize a 3x3 tic tac toe board with 9 '*'"""
+        self.board = ['*'] * 9
 
     def __str__(self):
-        """return a string representation of the board"""
-        return f"{self.board[0]} {self.board[1]} {self.board[2]} {self.board[3]} {self.board[4]} {self.board[5]} {self.board[6]} {self.board[7]} {self.board[8]}"
+        """return a string representation of the board """
+        return f"{self.board[0]} {self.board[1]} {self.board[2]}\n{self.board[3]} {self.board[4]} {self.board[5]}\n{self.board[6]} {self.board[7]} {self.board[8]}"
 
-    def make_move(self, player, position):
-        """
+    def make_move(self, player, pos):
+        """Places a move for the player at position pos if valid
+        
         Args:
-        Player = string "X" or "0"
+            player - string "X" or "O"
+            pos - integer 0-8 representing board position
 
         Returns:
-        Ture if a move was made, false otherwise
+            True if a move was made, False otherwise
         """
-        if 0 <= position <= 8 and self.board [position] == '*':
-            self.board[position] = player
+        if 0 <= pos <= 8 and self.board[pos] == '*':
+            self.board[pos] = player
             return True
         return False
 
     def has_won(self, player):
         """Check if the player has won
-
-        Args: 
-        Player = string of either "X" or "0"
+        
+        Args:
+            player - string of either "X" or "O"
 
         Return:
-        True if the player has won, false otherwise
-
+            True if the player has won, False otherwise
         """
+        pass
+        winning_combos = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
+
+        for combo in winning_combos:
+            if self.board[combo[0]] == player and self.board[combo[1]] == player and self.board[combo[2]] == player:
+                return True
+        return False
+
     def game_over(self):
-        """Check if the game is over (someone won or the game is over)"""
-        self.has_won("x") or self.has_won("0") or '*' not in self.board
+        """Check if the game is over (someone has won or the board is full)"""
+        return self.has_won("X") or self.has_won("O") or '*' not in self.board
+    
+    def clear(self):
+        """Clear the board for a new game"""
+        self.board = ['*'] * 9
 
 def play_tic_tac_toe() -> None:
     """Uses your class to play TicTacToe"""
@@ -93,6 +105,7 @@ if __name__ == "__main__":
     # need to write some more tests to make sure that your TTTBoard class is behaving
     # properly.
     brd = TTTBoard()
+    print(brd)
     print()
     brd.make_move("X", 8)
     brd.make_move("O", 7)
@@ -124,3 +137,4 @@ if __name__ == "__main__":
 
     # uncomment to play!
     # play_tic_tac_toe()
+    play_tic_tac_toe()
